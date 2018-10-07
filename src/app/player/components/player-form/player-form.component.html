@@ -1,0 +1,22 @@
+<form [formGroup]="playerForm" class="player-form">
+  <div class="player-form__inputs">
+    <input placeholder="First name"
+           [ngClass]="{ 'player-form__error': isInvalid('firstName') }"
+           type="text" formControlName="firstName"
+           class="player-form__input">
+    <input placeholder="Last name"
+           [ngClass]="{ 'player-form__error': isInvalid('lastName') }"
+           type="text" formControlName="lastName"
+           class="player-form__input">
+    <input placeholder="email"
+           [ngClass]="{ 'player-form__error': isInvalid('email') }"
+           type="email" formControlName="email"
+           class="player-form__input">
+  </div>
+
+  <div class="player-form__buttons">
+    <button *ngIf="!exists" (click)="onCreate()" class="player-form__button">Create</button>
+    <button *ngIf="exists" (click)="onUpdate()" class="player-form__button">Update</button>
+    <button (click)="onCancel()" class="player-form__button">Cancel</button>
+  </div>
+</form>

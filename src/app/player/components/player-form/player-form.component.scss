@@ -1,0 +1,24 @@
+.player-form {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  &__input {
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+  }
+  &__button {
+    margin-right: 10px;
+  }
+  &__error {
+    border: 1px solid red;
+  }
+}

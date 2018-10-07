@@ -1,17 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PlayerRoutingModule } from './player-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import * as fromComponents from './components';
+import { PlayerRoutingModule } from './player-routing.module';
+import * as fromPresenters from './presenters';
 
 @NgModule({
   imports: [
     CommonModule,
-    PlayerRoutingModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    PlayerRoutingModule,
   ],
   declarations: [
+    ...fromPresenters.presenters,
     ...fromComponents.components,
-  ]
+  ],
 })
-export class PlayerModule { }
+export class PlayerModule {
+}

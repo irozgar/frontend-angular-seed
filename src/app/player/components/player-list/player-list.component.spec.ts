@@ -8,14 +8,15 @@ describe('PlayerListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerListComponent ]
+      declarations: [PlayerListComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerListComponent);
     component = fixture.componentInstance;
+    component.players = [];
     fixture.detectChanges();
   });
 
