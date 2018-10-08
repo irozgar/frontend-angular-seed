@@ -1,18 +1,21 @@
-<button routerLink="/player/create">Create Player</button>
 
 <div *ngIf="!players.length">
   No players available
 </div>
 
-<table *ngIf="players.length">
+<table class="table" *ngIf="players.length">
   <tr>
     <th>Firstname</th>
     <th>Lastname</th>
     <th>email</th>
+    <th></th>
+    <th></th>
   </tr>
-  <tr *ngFor="let player of players" routerLink="/player/{{player.id}}/edit">
+  <tr *ngFor="let player of players" >
     <td>{{player.firstName}}</td>
     <td>{{player.lastName}}</td>
     <td>{{player.email}}</td>
+    <td class="table__edit" routerLink="/player/{{player.id}}/edit">edit</td>
+    <td class="table__delete" (click)="onDelete($event, player.id)">X</td>
   </tr>
 </table>

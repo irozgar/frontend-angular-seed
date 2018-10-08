@@ -1,2 +1,4 @@
-<app-player-list [players]="players$ | async"></app-player-list>
+<button routerLink="/player/create">Create Player</button>
+
+<app-player-list [players]="players$ | async" (delete)="onDelete($event)"></app-player-list>
 

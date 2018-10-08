@@ -26,12 +26,12 @@ export const GetPlayerSelected = createSelector(
   },
 );
 
-export const getPlayerLoaded = createSelector(
+export const GetPlayerLoaded = createSelector(
   GetPlayerState,
   fromReducers.getPlayerLoaded,
 );
 
-export const getPlayerLoading = createSelector(
+export const GetPlayerLoading = createSelector(
   GetPlayerState,
   fromReducers.getPlayerLoading,
 );

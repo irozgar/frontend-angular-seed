@@ -1,0 +1,15 @@
+.table {
+  &__edit {
+    color: blue;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 15px;
+  }
+
+  &__delete {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 5px;
+  }
+}

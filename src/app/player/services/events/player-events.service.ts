@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Player } from '../../entities';
-import { PlayerState } from '../../store';
-import { CreatePlayer } from '../../store/actions';
+import { CreatePlayer, DeletePlayer, GetPlayers, UpdatePlayer } from '../../store/actions';
+import { PlayerState } from '../../store/reducers';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class PlayerEventsService {
   }
 
   getAll(): void {
-    console.log('[PlayerEventsService] GetAll');
+    this.store.dispatch(new GetPlayers());
   }
 
   get(): void {
@@ -26,10 +26,10 @@ export class PlayerEventsService {
   }
 
   update(player: Player): void {
-    console.log('[PlayerEventsService] Update');
+    this.store.dispatch(new UpdatePlayer(player));
   }
 
-  deleteById(playerId: string): void {
-    console.log('[PlayerEventsService] DeleteById', playerId);
+  delete(playerId: string): void {
+    this.store.dispatch(new DeletePlayer(playerId));
   }
 }

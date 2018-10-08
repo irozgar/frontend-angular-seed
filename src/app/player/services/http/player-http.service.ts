@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Player } from '../../entities';
 
@@ -15,13 +15,13 @@ export class PlayerHttpService {
 
   public create(player: Player): Observable<Player> {
     return this.httpService
-      .post<Player>(`/api/players`, player)
+      .post<Player>(`/api/player`, player)
       .pipe(catchError((error: any) => Observable.throw(error)));
   }
 
   public getAll(): Observable<Player[]> {
     return this.httpService
-      .get<Player[]>(`/api/players`)
+      .get<Player[]>(`/api/player`)
       .pipe(catchError((error: any) => Observable.throw(error)));
   }
 
@@ -31,11 +31,13 @@ export class PlayerHttpService {
       .pipe(catchError((error: any) => Observable.throw(error)));
   }
 
-  public updateById(playerId: string, player: Player): Observable<Player> {
+  public updateById(player: Player): Observable<Player> {
     return this.httpService
-      .put<Player>(`/api/player/${playerId}`, player)
-      .pipe(catchError((error: any) => Observable.throw(error)));
-  }
+      .put<Player>(`/api/player/${player.id}`, player)
+      .pipe(catchError((error: any) => {
+        console.log(error);
+        return Observable.throw(error);
+      }));  }
 
   public deleteById(playerId: string): Observable<Player> {
     return this.httpService

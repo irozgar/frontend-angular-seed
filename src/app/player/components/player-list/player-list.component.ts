@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Player } from '../../entities';
 
@@ -7,13 +7,19 @@ import { Player } from '../../entities';
   templateUrl: './player-list.component.html',
   styleUrls: ['./player-list.component.scss'],
 })
-export class PlayerListComponent implements OnInit {
+export class PlayerListComponent {
   @Input() players: Player[];
+  @Output() private delete = new EventEmitter<string>();
 
   constructor() {
   }
 
-  ngOnInit() {
+  onDelete($event: Event, playerId: string) {
+    $event.stopPropagation();
+    const remove = window.confirm('Are you sure?');
+    if (remove) {
+      this.delete.emit(playerId);
+    }
   }
 
 }

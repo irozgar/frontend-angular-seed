@@ -28,6 +28,10 @@ export class PlayerItemPresenter implements OnInit {
     this.playerEventsService.create($event);
   }
 
+  onUpdate($event: Player) {
+    this.playerEventsService.update($event);
+  }
+
   onCancel() {
     this.routerService.navigate('/player');
   }

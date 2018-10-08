@@ -9,12 +9,8 @@ export interface IPlayerState {
   error: any;
 }
 
-const pl = Player.builder().id('1').firstName('Albert').lastName('Parron').email('test@test.com').build();
-
 const initialState: IPlayerState = {
-  entities: {
-    [pl.id]: pl,
-  },
+  entities: {},
   loading: false,
   loaded: false,
   error: null,
@@ -22,7 +18,10 @@ const initialState: IPlayerState = {
 
 export function playerReducer(state: IPlayerState = initialState, action: PlayerActions) {
   switch (action.type) {
+    case fromPlayerActions.GET_PLAYERS:
     case fromPlayerActions.CREATE_PLAYER:
+    case fromPlayerActions.UPDATE_PLAYER:
+    case fromPlayerActions.DELETE_PLAYER:
       return {
         ...state,
         loading: true,
@@ -30,13 +29,25 @@ export function playerReducer(state: IPlayerState = initialState, action: Player
       };
 
     case fromPlayerActions.CREATE_PLAYER_SUCCESS:
-      const playerCreated = action.payload;
+    case fromPlayerActions.UPDATE_PLAYER_SUCCESS:
+      const newPlayer = action.payload;
       return {
         ...state,
         loading: false,
         entities: {
-          [playerCreated.id]: playerCreated,
+          [newPlayer.id]: newPlayer,
         },
+        error: null,
+      };
+
+    case fromPlayerActions.DELETE_PLAYER_SUCCESS:
+      const playerDeleted = action.payload;
+      const {[playerDeleted]: removed, ...others} = state.entities;
+
+      return {
+        ...state,
+        loading: false,
+        entities: others,
         error: null,
       };
 
@@ -46,6 +57,29 @@ export function playerReducer(state: IPlayerState = initialState, action: Player
         ...state,
         loading: false,
         error,
+      };
+
+
+    case fromPlayerActions.GET_PLAYERS_SUCCESS:
+      const players = action.payload;
+
+      const entities = players.reduce(
+        (list: { [id: string]: Player }, player: Player) => {
+          return {
+            ...list,
+            [player.id]: player,
+          };
+        },
+        {
+          ...state.entities,
+        },
+      );
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        entities,
+        error: null,
       };
 
     default:

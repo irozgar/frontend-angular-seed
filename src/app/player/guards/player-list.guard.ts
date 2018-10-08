@@ -1,14 +1,37 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Resolve } from '@angular/router';
+
+import { Observable, of } from 'rxjs';
+import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
+
+import { PlayerEventsService, PlayerStoreService } from '../services';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PlayerListGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+export class PlayerListGuard implements Resolve<Observable<boolean>> {
+  constructor(
+    private playerStoreService: PlayerStoreService,
+    private playerEventsService: PlayerEventsService,
+  ) {
+  }
+
+  resolve(): Observable<boolean> {
+    return this.checkStore().pipe(
+      switchMap(() => of(true)),
+      catchError(() => of(false)),
+    );
+  }
+
+  checkStore(): Observable<boolean> {
+    return this.playerStoreService.getLoaded().pipe(
+      tap(loaded => {
+        if (!loaded) {
+          this.playerEventsService.getAll();
+        }
+      }),
+      filter(loaded => loaded),
+      take(1),
+    );
   }
 }

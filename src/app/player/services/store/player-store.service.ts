@@ -3,8 +3,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Player } from '../../entities';
-import { PlayerState } from '../../store';
-import { GetPlayerList, GetPlayerSelected } from '../../store/selectors';
+import { PlayerState } from '../../store/reducers';
+import { GetPlayerList, GetPlayerLoaded, GetPlayerSelected } from '../../store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,6 @@ export class PlayerStoreService {
   }
 
   getLoaded(): Observable<boolean> {
-    console.log('[PlayerStoreService] GetLoaded');
-    return;
+    return this.store.pipe(select(GetPlayerLoaded));
   }
 }

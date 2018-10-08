@@ -15,8 +15,8 @@
   </div>
 
   <div class="player-form__buttons">
-    <button *ngIf="!exists" (click)="onCreate()" class="player-form__button">Create</button>
-    <button *ngIf="exists" (click)="onUpdate()" class="player-form__button">Update</button>
-    <button (click)="onCancel()" class="player-form__button">Cancel</button>
+    <button *ngIf="!exists" (click)="onCreate()" type="button" class="player-form__button">Create</button>
+    <button *ngIf="exists" (click)="onUpdate()" type="button" class="player-form__button">Update</button>
+    <button (click)="onCancel()" type="button" class="player-form__button">Cancel</button>
   </div>
 </form>

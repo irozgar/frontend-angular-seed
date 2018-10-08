@@ -1,5 +1,6 @@
 <app-player-form
   [player]="player$ | async"
   (create)="onCreate($event)"
+  (update)="onUpdate($event)"
   (cancel)="onCancel()">
 </app-player-form>

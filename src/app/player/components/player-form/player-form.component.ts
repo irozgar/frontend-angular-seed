@@ -18,7 +18,6 @@ export class PlayerFormComponent implements OnInit {
   public submitted = false;
   public exists = false;
 
-
   constructor(private fb: FormBuilder) {
   }
 
@@ -38,7 +37,11 @@ export class PlayerFormComponent implements OnInit {
     const { value, valid } = this.playerForm;
     this.submitted = true;
     if (valid) {
-      this.update.emit(Player.fromJSON(value));
+      const pl = {
+        ...this.player,
+        ...value,
+      };
+      this.update.emit(Player.fromJSON(pl));
     }
   }
 

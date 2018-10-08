@@ -15,7 +15,7 @@ export class PlayerEffects {
   }
 
   @Effect()
-  public createTalentLead$ = this.actions$.pipe(
+  public createPlayer = this.actions$.pipe(
     ofType(playerActions.CREATE_PLAYER),
     map((action: playerActions.CreatePlayer) => action.payload),
     switchMap((player: Player) => {
@@ -23,6 +23,42 @@ export class PlayerEffects {
         map(response => Player.fromJSON(response)),
         map(playerEntity => new playerActions.CreatePlayerSuccess(playerEntity)),
         catchError(error => of(new playerActions.CreatePlayerFail(error))),
+      );
+    }),
+  );
+
+  @Effect()
+  public getPlayers = this.actions$.pipe(
+    ofType(playerActions.GET_PLAYERS),
+    switchMap(() => {
+      return this.playerHttpService.getAll().pipe(
+        map(response => response.map(player => Player.fromJSON(player))),
+        map(players => new playerActions.GetPlayersSuccess(players)),
+        catchError(error => of(new playerActions.GetPlayersFail(error))),
+      );
+    }),
+  );
+
+  @Effect()
+  public updatePlayer = this.actions$.pipe(
+    ofType(playerActions.UPDATE_PLAYER),
+    map((action: playerActions.UpdatePlayer) => action.payload),
+    switchMap((player: Player) => {
+      return this.playerHttpService.updateById(player).pipe(
+        map(res => new playerActions.UpdatePlayerSuccess(player)),
+        catchError(error => of(new playerActions.UpdatePlayerFail(error))),
+      );
+    }),
+  );
+
+  @Effect()
+  public deletePlayer = this.actions$.pipe(
+    ofType(playerActions.DELETE_PLAYER),
+    map((action: playerActions.DeletePlayer) => action.payload),
+    switchMap((playerId: string) => {
+      return this.playerHttpService.deleteById(playerId).pipe(
+        map(players => new playerActions.DeletePlayerSuccess(playerId)),
+        catchError(error => of(new playerActions.DeletePlayerFail(error))),
       );
     }),
   );
