@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Player } from '../../entities';
+import { CreatePlayer, PlayerState } from '../../store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerEventsService {
 
-  constructor() {
+  constructor(private store: Store<PlayerState>) {
   }
 
   create(player: Player): void {
-    console.log('[PlayerEventsService] Create', player);
+    this.store.dispatch(new CreatePlayer(player));
   }
 
   getAll(): void {

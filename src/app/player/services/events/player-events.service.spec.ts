@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { PlayerEventsService } from './player-events.service';
+import { StoreModule } from '@ngrx/store';
 
 describe('PlayerEventsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PlayerEventsService]
+      providers: [PlayerEventsService],
+      imports: [StoreModule.forRoot({})],
     });
   });
 

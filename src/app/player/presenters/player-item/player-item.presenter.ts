@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Player } from '../../entities';
+import { PlayerEventsService } from '../../services';
 
 @Component({
   selector: 'app-player-item',
@@ -11,17 +12,17 @@ import { Player } from '../../entities';
 export class PlayerItemPresenter implements OnInit {
   public player$: Observable<Player>;
 
-  constructor() {
+  constructor(private playerEvents: PlayerEventsService) {
   }
 
   ngOnInit() {
     const pl = Player.builder().id('1').firstName('Albert').lastName('Parron').email('test@test.com').build();
 
-    this.player$ = of(pl);
+    this.player$ = of(null);
   }
 
   onCreate($event: Player) {
-    console.log($event);
+    this.playerEvents.create($event);
   }
 
   onCancel() {

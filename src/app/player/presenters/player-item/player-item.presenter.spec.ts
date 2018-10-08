@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { PlayerFormComponent } from '../../components';
 
 import { PlayerItemPresenter } from './player-item.presenter';
+import { StoreModule } from '@ngrx/store';
 
 describe('PlayerItemPresenter', () => {
   let component: PlayerItemPresenter;
@@ -12,7 +13,7 @@ describe('PlayerItemPresenter', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [FormsModule, ReactiveFormsModule, StoreModule.forRoot({})],
       declarations: [PlayerFormComponent, PlayerItemPresenter],
     })
       .compileComponents();
