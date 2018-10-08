@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component';
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot({
     }),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

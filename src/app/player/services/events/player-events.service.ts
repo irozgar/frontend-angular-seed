@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Player } from '../../entities';
-import { CreatePlayer, PlayerState } from '../../store';
+import { PlayerState } from '../../store';
+import { CreatePlayer } from '../../store/actions';
 
 @Injectable({
   providedIn: 'root',

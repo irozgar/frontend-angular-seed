@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { RouterService } from '../../../shared/services';
 import { Player } from '../../entities';
-import { PlayerEventsService } from '../../services';
+import { PlayerEventsService, PlayerStoreService } from '../../services';
 
 @Component({
   selector: 'app-player-item',
@@ -12,21 +13,23 @@ import { PlayerEventsService } from '../../services';
 export class PlayerItemPresenter implements OnInit {
   public player$: Observable<Player>;
 
-  constructor(private playerEvents: PlayerEventsService) {
+  constructor(
+    private playerEventsService: PlayerEventsService,
+    private playerStoreService: PlayerStoreService,
+    private routerService: RouterService,
+  ) {
   }
 
   ngOnInit() {
-    const pl = Player.builder().id('1').firstName('Albert').lastName('Parron').email('test@test.com').build();
-
-    this.player$ = of(null);
+    this.player$ = this.playerStoreService.getCurrent();
   }
 
   onCreate($event: Player) {
-    this.playerEvents.create($event);
+    this.playerEventsService.create($event);
   }
 
   onCancel() {
-    console.log('cancel');
+    this.routerService.navigate('/player');
   }
 
 }

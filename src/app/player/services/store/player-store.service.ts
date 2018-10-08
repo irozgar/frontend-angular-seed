@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Player } from '../../entities';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
+import { Player } from '../../entities';
+import { PlayerState } from '../../store';
+import { GetPlayerList, GetPlayerSelected } from '../../store/selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerStoreService {
 
-  constructor() {
+  constructor(private store: Store<PlayerState>) {
   }
 
   getAll(): Observable<Player[]> {
-    console.log('[PlayerStoreService] GetAll');
-    return;
+    return this.store.pipe(select(GetPlayerList));
   }
 
   getCurrent(): Observable<Player> {
-    console.log('[PlayerStoreService] GetCurrent');
-    return;
+    return this.store.pipe(select(GetPlayerSelected));
   }
 
   getLoading(): Observable<boolean> {

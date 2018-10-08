@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'create',
     component: fromPresenters.PlayerItemPresenter,
   },
+  {
+    path: ':playerId/edit',
+    component: fromPresenters.PlayerItemPresenter,
+  },
 ];
 
 @NgModule({

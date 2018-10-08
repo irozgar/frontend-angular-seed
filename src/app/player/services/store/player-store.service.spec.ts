@@ -1,11 +1,13 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { PlayerStoreService } from './player-store.service';
 
 describe('PlayerStoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PlayerStoreService]
+      imports: [StoreModule.forRoot({})],
+      providers: [PlayerStoreService],
     });
   });
 

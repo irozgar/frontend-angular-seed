@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Player } from '../../entities';
+import { PlayerStoreService } from '../../services';
 
 @Component({
   selector: 'app-player-list-presenter',
@@ -11,12 +12,11 @@ import { Player } from '../../entities';
 export class PlayerListPresenter implements OnInit {
   public players$: Observable<Player[]>;
 
-  constructor() {
+  constructor(private playerStoreService: PlayerStoreService) {
   }
 
   ngOnInit() {
-    const pl = Player.builder().firstName('Albert').lastName('Parron').email('test@test.com').build();
-    this.players$ = of([pl]);
+    this.players$ = this.playerStoreService.getAll();
   }
 
 }

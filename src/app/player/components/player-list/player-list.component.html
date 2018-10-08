@@ -10,7 +10,7 @@
     <th>Lastname</th>
     <th>email</th>
   </tr>
-  <tr *ngFor="let player of players">
+  <tr *ngFor="let player of players" routerLink="/player/{{player.id}}/edit">
     <td>{{player.firstName}}</td>
     <td>{{player.lastName}}</td>
     <td>{{player.email}}</td>

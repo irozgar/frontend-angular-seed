@@ -9,8 +9,12 @@ export interface IPlayerState {
   error: any;
 }
 
+const pl = Player.builder().id('1').firstName('Albert').lastName('Parron').email('test@test.com').build();
+
 const initialState: IPlayerState = {
-  entities: {},
+  entities: {
+    [pl.id]: pl,
+  },
   loading: false,
   loaded: false,
   error: null,
@@ -48,3 +52,7 @@ export function playerReducer(state: IPlayerState = initialState, action: Player
       return state;
   }
 }
+
+export const getPlayerEntities = (state: IPlayerState) => state.entities;
+export const getPlayerLoading = (state: IPlayerState) => state.loading;
+export const getPlayerLoaded = (state: IPlayerState) => state.loaded;
