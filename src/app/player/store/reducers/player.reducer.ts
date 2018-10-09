@@ -30,6 +30,7 @@ export function playerReducer(state: IPlayerState = initialState, action: Player
 
     case fromPlayerActions.CREATE_PLAYER_SUCCESS:
     case fromPlayerActions.UPDATE_PLAYER_SUCCESS:
+    case fromPlayerActions.GET_PLAYER_SUCCESS:
       const newPlayer = action.payload;
       return {
         ...state,
@@ -37,6 +38,7 @@ export function playerReducer(state: IPlayerState = initialState, action: Player
         entities: {
           [newPlayer.id]: newPlayer,
         },
+        loaded: true,
         error: null,
       };
 

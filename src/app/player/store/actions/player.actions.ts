@@ -42,6 +42,26 @@ export class GetPlayersFail implements Action {
 }
 
 
+export const GET_PLAYER = '[Player] Get Player';
+export const GET_PLAYER_SUCCESS = '[Player] Get Player Success';
+export const GET_PLAYER_FAIL = '[Player] Get Player Error';
+
+export class GetPlayer implements Action {
+  public readonly type = GET_PLAYER;
+  constructor(public payload: string) {}
+}
+
+export class GetPlayerSuccess implements Action {
+  public readonly type = GET_PLAYER_SUCCESS;
+  constructor(public payload: Player) {}
+}
+
+export class GetPlayerFail implements Action {
+  public readonly type = GET_PLAYER_FAIL;
+  constructor(public payload: any) {}
+}
+
+
 export const UPDATE_PLAYER = '[Player] Update Player';
 export const UPDATE_PLAYER_SUCCESS = '[Player] Update Player Success';
 export const UPDATE_PLAYER_FAIL = '[Player] Update Player Error';
@@ -89,6 +109,9 @@ export type PlayerActions =
   | GetPlayers
   | GetPlayersSuccess
   | GetPlayersFail
+  | GetPlayer
+  | GetPlayerSuccess
+  | GetPlayerFail
   | UpdatePlayer
   | UpdatePlayerSuccess
   | UpdatePlayerFail

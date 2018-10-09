@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlayerListGuard } from './guards';
+import { PlayerItemGuard, PlayerListGuard } from './guards';
 import * as fromPresenters from './presenters';
 
 const routes: Routes = [
@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: ':playerId/edit',
     component: fromPresenters.PlayerItemPresenter,
+    resolve: {
+      player: PlayerItemGuard,
+    },
+
   },
 ];
 

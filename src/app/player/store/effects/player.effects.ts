@@ -40,6 +40,19 @@ export class PlayerEffects {
   );
 
   @Effect()
+  public getPlayer = this.actions$.pipe(
+    ofType(playerActions.GET_PLAYER),
+    map((action: playerActions.GetPlayer) => action.payload),
+    switchMap((playerId: string) => {
+      return this.playerHttpService.getById(playerId).pipe(
+        map(player => Player.fromJSON(player)),
+        map(player => new playerActions.GetPlayerSuccess(player)),
+        catchError(error => of(new playerActions.GetPlayerFail(error))),
+      );
+    }),
+  );
+
+  @Effect()
   public updatePlayer = this.actions$.pipe(
     ofType(playerActions.UPDATE_PLAYER),
     map((action: playerActions.UpdatePlayer) => action.payload),

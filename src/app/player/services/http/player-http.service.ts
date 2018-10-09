@@ -26,6 +26,7 @@ export class PlayerHttpService {
   }
 
   public getById(playerId: string): Observable<Player> {
+    console.log(playerId)
     return this.httpService
       .get<Player>(`/api/player/${playerId}`)
       .pipe(catchError((error: any) => Observable.throw(error)));
