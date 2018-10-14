@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
 import { CustomSerializer } from './store/reducers/router.reducer';
 
+import * as fromComponents from './components';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +16,7 @@ import { CustomSerializer } from './store/reducers/router.reducer';
   providers: [
     { provide: RouterStateSerializer, useClass: CustomSerializer },
   ],
-  declarations: [],
+  declarations: [...fromComponents.components],
+  exports: [...fromComponents.components],
 })
 export class SharedModule { }

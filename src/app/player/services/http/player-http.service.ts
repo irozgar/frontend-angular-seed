@@ -26,7 +26,6 @@ export class PlayerHttpService {
   }
 
   public getById(playerId: string): Observable<Player> {
-    console.log(playerId)
     return this.httpService
       .get<Player>(`/api/player/${playerId}`)
       .pipe(catchError((error: any) => Observable.throw(error)));
@@ -35,10 +34,8 @@ export class PlayerHttpService {
   public updateById(player: Player): Observable<Player> {
     return this.httpService
       .put<Player>(`/api/player/${player.id}`, player)
-      .pipe(catchError((error: any) => {
-        console.log(error);
-        return Observable.throw(error);
-      }));  }
+      .pipe(catchError((error: any) => Observable.throw(error)));
+  }
 
   public deleteById(playerId: string): Observable<Player> {
     return this.httpService

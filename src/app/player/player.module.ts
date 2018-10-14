@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from '../shared/shared.module';
+
 import * as fromComponents from './components';
 import { PlayerRoutingModule } from './player-routing.module';
 import * as fromPresenters from './presenters';
@@ -20,6 +22,7 @@ import * as fromReducers from './store/reducers';
     PlayerRoutingModule,
     StoreModule.forFeature('player', fromReducers.reducers),
     EffectsModule.forFeature([PlayerEffects]),
+    SharedModule,
   ],
   declarations: [
     ...fromPresenters.presenters,

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Player } from '../../entities';
 import { PlayerState } from '../../store/reducers';
-import { GetPlayerEntities, GetPlayerList, GetPlayerLoaded, GetPlayerSelected } from '../../store/selectors';
+import { GetPlayerEntities, GetPlayerList, GetPlayerLoaded, GetPlayerLoading, GetPlayerSelected } from '../../store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +27,7 @@ export class PlayerStoreService {
   }
 
   getLoading(): Observable<boolean> {
-    console.log('[PlayerStoreService] GetLoading');
-    return;
+    return this.store.pipe(select(GetPlayerLoading));
   }
 
   getLoaded(): Observable<boolean> {

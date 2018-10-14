@@ -11,6 +11,7 @@ import { PlayerEventsService, PlayerStoreService } from '../../services';
 })
 export class PlayerListPresenter implements OnInit {
   public players$: Observable<Player[]>;
+  public loading$: Observable<boolean>;
 
   constructor(
     private playerEventsService: PlayerEventsService,
@@ -20,6 +21,7 @@ export class PlayerListPresenter implements OnInit {
 
   ngOnInit() {
     this.players$ = this.playerStoreService.getAll();
+    this.loading$ = this.playerStoreService.getLoading();
   }
 
   onDelete($event: string) {
