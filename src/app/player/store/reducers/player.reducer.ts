@@ -18,7 +18,7 @@ export interface IPlayerState {
   error: any;
 }
 
-const initialState: IPlayerState = {
+export const initialState: IPlayerState = {
   entities: {},
   loading: false,
   loaded: false,

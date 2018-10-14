@@ -2,7 +2,7 @@ export const generateState = (state, action, actions) => {
   actions.default = generateDefault;
 
   if (actions[action.type] && actions[action.type] instanceof Array) {
-    let newState = {};
+    let newState = state;
 
     for (const composableState of actions[action.type]) {
       newState = {
@@ -37,6 +37,7 @@ export const addItem = (state, { payload }) => {
   return {
     ...state,
     entities: {
+      ...state.entities,
       [payload.id]: payload,
     },
     loaded: true,

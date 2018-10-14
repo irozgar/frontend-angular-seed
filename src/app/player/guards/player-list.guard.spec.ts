@@ -1,11 +1,13 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { PlayerListGuard } from './player-list.guard';
 
 describe('PlayerListGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PlayerListGuard]
+      providers: [PlayerListGuard],
+      imports: [StoreModule.forRoot({})],
     });
   });
 

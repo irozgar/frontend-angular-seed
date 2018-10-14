@@ -70,7 +70,7 @@ export class PlayerEffects {
     map((action: playerActions.DeletePlayer) => action.payload),
     switchMap((playerId: string) => {
       return this.playerHttpService.deleteById(playerId).pipe(
-        map(players => new playerActions.DeletePlayerSuccess(playerId)),
+        map(players => new playerActions.DeletePlayerSuccess((playerId))),
         catchError(error => of(new playerActions.DeletePlayerFail(error))),
       );
     }),
