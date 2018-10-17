@@ -13,7 +13,6 @@ const PlayersData = [PlayerData, PlayerData2];
 const PlayerEntities = {
   [PlayerData.id]: PlayerData,
   [PlayerData2.id]: PlayerData2,
-
 };
 
 const customInitialState = {
