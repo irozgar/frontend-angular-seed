@@ -15,7 +15,7 @@ export class PlayerEffects {
   }
 
   @Effect()
-  public createPlayer = this.actions$.pipe(
+  createPlayer$ = this.actions$.pipe(
     ofType(playerActions.CREATE_PLAYER),
     map((action: playerActions.CreatePlayer) => action.payload),
     switchMap((player: Player) => {
@@ -28,7 +28,7 @@ export class PlayerEffects {
   );
 
   @Effect()
-  public getPlayers = this.actions$.pipe(
+  getPlayers$ = this.actions$.pipe(
     ofType(playerActions.GET_PLAYERS),
     switchMap(() => {
       return this.playerHttpService.getAll().pipe(
@@ -40,7 +40,7 @@ export class PlayerEffects {
   );
 
   @Effect()
-  public getPlayer = this.actions$.pipe(
+  getPlayer$ = this.actions$.pipe(
     ofType(playerActions.GET_PLAYER),
     map((action: playerActions.GetPlayer) => action.payload),
     switchMap((playerId: string) => {
@@ -53,7 +53,7 @@ export class PlayerEffects {
   );
 
   @Effect()
-  public updatePlayer = this.actions$.pipe(
+  updatePlayer$ = this.actions$.pipe(
     ofType(playerActions.UPDATE_PLAYER),
     map((action: playerActions.UpdatePlayer) => action.payload),
     switchMap((player: Player) => {
@@ -65,7 +65,7 @@ export class PlayerEffects {
   );
 
   @Effect()
-  public deletePlayer = this.actions$.pipe(
+  deletePlayer$ = this.actions$.pipe(
     ofType(playerActions.DELETE_PLAYER),
     map((action: playerActions.DeletePlayer) => action.payload),
     switchMap((playerId: string) => {
