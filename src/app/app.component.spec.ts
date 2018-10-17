@@ -1,13 +1,14 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([])],
+      imports: [RouterModule.forRoot([]), SimpleNotificationsModule.forRoot()],
       declarations: [
         AppComponent,
       ],

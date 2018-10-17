@@ -10,32 +10,29 @@ const PlayerIdData = '';
 describe('Player Actions', () => {
   describe('[CreatePlayer actions]', () => {
     it('(CreatePlayer) should create an action', () => {
-      const payload = PlayerData;
-      const action = new fromProject.CreatePlayer(payload);
+      const action = new fromProject.CreatePlayer(PlayerData);
 
       expect({...action}).toEqual({
         type: fromProject.CREATE_PLAYER,
-        payload,
+        payload: PlayerData,
       });
     });
 
     it('(CreatePlayerFail) should create an action', () => {
-      const payload = ErrorData;
-      const action = new fromProject.CreatePlayerFail(payload);
+      const action = new fromProject.CreatePlayerFail(ErrorData);
 
       expect({...action}).toEqual({
         type: fromProject.CREATE_PLAYER_FAIL,
-        payload,
+        payload: ErrorData,
       });
     });
 
     it('(CreatePlayerSuccess) should create an action', () => {
-      const payload = PlayerData;
-      const action = new fromProject.CreatePlayerSuccess(payload);
+      const action = new fromProject.CreatePlayerSuccess(PlayerData);
 
       expect({...action}).toEqual({
         type: fromProject.CREATE_PLAYER_SUCCESS,
-        payload,
+        payload: PlayerData,
       });
     });
   });
@@ -50,118 +47,107 @@ describe('Player Actions', () => {
     });
 
     it('(GetPlayersFail) should create an action', () => {
-      const payload = ErrorData;
-      const action = new fromProject.GetPlayersFail(payload);
+      const action = new fromProject.GetPlayersFail(ErrorData);
 
       expect({...action}).toEqual({
         type: fromProject.GET_PLAYERS_FAIL,
-        payload,
+        payload: ErrorData,
       });
     });
 
     it('(GetPlayersSuccess) should create an action', () => {
-      const payload = PlayersData;
-      const action = new fromProject.GetPlayersSuccess(payload);
+      const action = new fromProject.GetPlayersSuccess(PlayersData);
 
       expect({...action}).toEqual({
         type: fromProject.GET_PLAYERS_SUCCESS,
-        payload,
+        payload: PlayersData,
       });
     });
   });
 
   describe('[GetPlayer actions]', () => {
     it('(GetPlayer) should create an action', () => {
-      const payload = PlayerIdData;
-      const action = new fromProject.GetPlayer(payload);
+      const action = new fromProject.GetPlayer(PlayerIdData);
 
       expect({...action}).toEqual({
         type: fromProject.GET_PLAYER,
-        payload,
+        payload: PlayerIdData,
       });
     });
 
     it('(GetPlayerFail) should create an action', () => {
-      const payload = ErrorData;
-      const action = new fromProject.GetPlayerFail(payload);
+      const action = new fromProject.GetPlayerFail(ErrorData);
 
       expect({...action}).toEqual({
         type: fromProject.GET_PLAYER_FAIL,
-        payload,
+        payload: ErrorData,
       });
     });
 
     it('(GetPlayerSuccess) should create an action', () => {
-      const payload = PlayerData;
-      const action = new fromProject.GetPlayerSuccess(payload);
+      const action = new fromProject.GetPlayerSuccess(PlayerData);
 
       expect({...action}).toEqual({
         type: fromProject.GET_PLAYER_SUCCESS,
-        payload,
+        payload: PlayerData,
       });
     });
   });
 
   describe('[UpdatePlayer actions]', () => {
     it('(UpdatePlayer) should create an action', () => {
-      const payload = PlayerData;
-      const action = new fromProject.UpdatePlayer(payload);
+      const action = new fromProject.UpdatePlayer(PlayerData);
 
       expect({...action}).toEqual({
         type: fromProject.UPDATE_PLAYER,
-        payload,
+        payload: PlayerData,
       });
     });
 
     it('(UpdatePlayerFail) should create an action', () => {
-      const payload = ErrorData;
-      const action = new fromProject.UpdatePlayerFail(payload);
+      const action = new fromProject.UpdatePlayerFail(ErrorData);
 
       expect({...action}).toEqual({
         type: fromProject.UPDATE_PLAYER_FAIL,
-        payload,
+        payload: ErrorData,
       });
     });
 
     it('(UpdatePlayerSuccess) should create an action', () => {
-      const payload = PlayerData;
-      const action = new fromProject.UpdatePlayerSuccess(payload);
+      const action = new fromProject.UpdatePlayerSuccess(PlayerData);
 
       expect({...action}).toEqual({
         type: fromProject.UPDATE_PLAYER_SUCCESS,
-        payload,
+        payload: PlayerData,
       });
     });
   });
 
   describe('[DeletePlayer actions]', () => {
     it('(DeletePlayer) should create an action', () => {
-      const payload = PlayerIdData;
-      const action = new fromProject.DeletePlayer(payload);
+      const action = new fromProject.DeletePlayer(PlayerIdData);
 
       expect({...action}).toEqual({
         type: fromProject.DELETE_PLAYER,
-        payload,
+        payload: PlayerIdData,
       });
     });
 
     it('(DeletePlayerFail) should create an action', () => {
-      const payload = ErrorData;
-      const action = new fromProject.DeletePlayerFail(payload);
+      const action = new fromProject.DeletePlayerFail(ErrorData);
 
       expect({...action}).toEqual({
         type: fromProject.DELETE_PLAYER_FAIL,
-        payload,
+        payload: ErrorData,
       });
     });
 
     it('(DeletePlayerSuccess) should create an action', () => {
-      const payload = PlayerIdData;
-      const action = new fromProject.DeletePlayerSuccess(payload);
+      const action = new fromProject.DeletePlayerSuccess(PlayerIdData);
 
       expect({...action}).toEqual({
         type: fromProject.DELETE_PLAYER_SUCCESS,
-        payload,
+        payload: PlayerIdData,
       });
     });
   });

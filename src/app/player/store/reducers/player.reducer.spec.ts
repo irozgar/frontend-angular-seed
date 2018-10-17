@@ -1,9 +1,9 @@
-import { from } from 'rxjs';
-
 import { Player } from '../../entities';
 import * as fromActions from '../actions/player.actions';
 
 import * as fromReducer from './player.reducer';
+
+const {initialState} = fromReducer;
 
 const ErrorData = {};
 const PlayerIdData = '1';
@@ -16,10 +16,14 @@ const PlayerEntities = {
 
 };
 
+const customInitialState = {
+  ...initialState,
+  entities: PlayerEntities,
+};
+
 describe('ProjectsReducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
-      const {initialState} = fromReducer;
       const action = {} as any;
       const state = fromReducer.playerReducer(undefined, action);
 
@@ -29,9 +33,7 @@ describe('ProjectsReducer', () => {
 
   describe('[CREATE_PLAYER actions]', () => {
     it('(CREATE_PLAYER) should set loading to true', () => {
-      const {initialState} = fromReducer;
-      const payload = PlayerData;
-      const action = new fromActions.CreatePlayer(payload);
+      const action = new fromActions.CreatePlayer(PlayerData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(state.loading).toEqual(true);
@@ -39,18 +41,8 @@ describe('ProjectsReducer', () => {
     });
 
     it('(CREATE_PLAYER_SUCCESS) should populate the new project', () => {
-      const {initialState} = fromReducer;
-      const customInitialState = {
-        ...initialState,
-        entities: {
-          [PlayerData2.id]: PlayerData2,
-        },
-      };
-      const payload = PlayerData;
-      const action = new fromActions.CreatePlayerSuccess(payload);
+      const action = new fromActions.CreatePlayerSuccess(PlayerData);
       const state = fromReducer.playerReducer(customInitialState, action);
-
-      console.log(state);
 
       expect(Object.keys(state.entities).length).toEqual(2);
       expect(state.loading).toEqual(false);
@@ -58,9 +50,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(CREATE_PLAYER_FAIL) should return the initial state', () => {
-      const {initialState} = fromReducer;
-      const payload = ErrorData;
-      const action = new fromActions.CreatePlayerFail(payload);
+      const action = new fromActions.CreatePlayerFail(ErrorData);
       const state = fromReducer.playerReducer(
         {...initialState, loading: true},
         action,
@@ -73,7 +63,6 @@ describe('ProjectsReducer', () => {
 
   describe('[GET_PLAYERS actions]', () => {
     it('(GET_PLAYERS) should set loading to true', () => {
-      const {initialState} = fromReducer;
       const action = new fromActions.GetPlayers();
       const state = fromReducer.playerReducer(initialState, action);
 
@@ -82,9 +71,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(GET_PLAYERS_SUCCESS) should populate the new project', () => {
-      const {initialState} = fromReducer;
-      const payload = PlayersData;
-      const action = new fromActions.GetPlayersSuccess(payload);
+      const action = new fromActions.GetPlayersSuccess(PlayersData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(Object.keys(state.entities).length).toEqual(2);
@@ -93,9 +80,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(GET_PLAYERS_FAIL) should return the initial state', () => {
-      const {initialState} = fromReducer;
-      const payload = ErrorData;
-      const action = new fromActions.GetPlayersFail(payload);
+      const action = new fromActions.GetPlayersFail(ErrorData);
       const state = fromReducer.playerReducer(
         {...initialState, loading: true},
         action,
@@ -108,9 +93,7 @@ describe('ProjectsReducer', () => {
 
   describe('[GET_PLAYER actions]', () => {
     it('(GET_PLAYER) should set loading to true', () => {
-      const {initialState} = fromReducer;
-      const payload = PlayerIdData;
-      const action = new fromActions.GetPlayer(payload);
+      const action = new fromActions.GetPlayer(PlayerIdData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(state.loading).toEqual(true);
@@ -118,9 +101,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(GET_PLAYER_SUCCESS) should populate the new project', () => {
-      const { initialState } = fromReducer;
-      const payload = PlayerData;
-      const action = new fromActions.GetPlayerSuccess(payload);
+      const action = new fromActions.GetPlayerSuccess(PlayerData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(Object.keys(state.entities).length).toEqual(1);
@@ -129,9 +110,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(GET_PLAYER_FAIL) should return the initial state', () => {
-      const {initialState} = fromReducer;
-      const payload = ErrorData;
-      const action = new fromActions.GetPlayerFail(payload);
+      const action = new fromActions.GetPlayerFail(ErrorData);
       const state = fromReducer.playerReducer(
         {...initialState, loading: true},
         action,
@@ -144,9 +123,7 @@ describe('ProjectsReducer', () => {
 
   describe('[UPDATE_PLAYER actions]', () => {
     it('(UPDATE_PLAYER) should set loading to true', () => {
-      const {initialState} = fromReducer;
-      const payload = PlayerData;
-      const action = new fromActions.UpdatePlayer(payload);
+      const action = new fromActions.UpdatePlayer(PlayerData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(state.loading).toEqual(true);
@@ -154,13 +131,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(UPDATE_PLAYER_SUCCESS) should populate the new project', () => {
-      const {initialState} = fromReducer;
-      const customInitialState = {
-        ...initialState,
-        entities: PlayerEntities,
-      };
-      const payload = PlayerData;
-      const action = new fromActions.UpdatePlayerSuccess(payload);
+      const action = new fromActions.UpdatePlayerSuccess(PlayerData);
       const state = fromReducer.playerReducer(customInitialState, action);
 
       expect(Object.keys(state.entities).length).toEqual(2);
@@ -169,9 +140,7 @@ describe('ProjectsReducer', () => {
     });
 
     it('(UPDATE_PLAYER_FAIL) should return the initial state', () => {
-      const {initialState} = fromReducer;
-      const payload = ErrorData;
-      const action = new fromActions.UpdatePlayerFail(payload);
+      const action = new fromActions.UpdatePlayerFail(ErrorData);
       const state = fromReducer.playerReducer(
         {...initialState, loading: true},
         action,
@@ -184,9 +153,7 @@ describe('ProjectsReducer', () => {
 
   describe('[DELETE_PLAYER actions]', () => {
     it('(DELETE_PLAYER) should set loading to true', () => {
-      const {initialState} = fromReducer;
-      const payload = PlayerIdData;
-      const action = new fromActions.DeletePlayer(payload);
+      const action = new fromActions.DeletePlayer(PlayerIdData);
       const state = fromReducer.playerReducer(initialState, action);
 
       expect(state.loading).toEqual(true);
@@ -194,24 +161,15 @@ describe('ProjectsReducer', () => {
     });
 
     it('(DELETE_PLAYER_SUCCESS) should remove the player', () => {
-      const {initialState} = fromReducer;
-      const customInitialState = {
-        ...initialState,
-        entities: PlayerEntities,
-      };
-
-      const payload = PlayerIdData;
-      const action = new fromActions.DeletePlayerSuccess(payload);
-
+      const action = new fromActions.DeletePlayerSuccess(PlayerIdData);
       const state = fromReducer.playerReducer(customInitialState, action);
+
       expect(state.loading).toEqual(false);
       expect(Object.keys(state.entities).length).toEqual(1);
     });
 
     it('(DELETE_PLAYER_FAIL) should return the initial state', () => {
-      const {initialState} = fromReducer;
-      const payload = ErrorData;
-      const action = new fromActions.DeletePlayerFail(payload);
+      const action = new fromActions.DeletePlayerFail(ErrorData);
       const state = fromReducer.playerReducer(
         {...initialState, loading: true},
         action,
