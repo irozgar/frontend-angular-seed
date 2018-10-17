@@ -29,7 +29,7 @@ describe('PlayerEffects', () => {
   let service: PlayerHttpService;
   let effects: fromEffects.PlayerEffects;
 
-  const players = [
+  const playersData = [
     Player.builder().id('1').firstName('Albert').build(),
     Player.builder().id('2').firstName('Albert2').build(),
   ];
@@ -53,9 +53,9 @@ describe('PlayerEffects', () => {
 
   describe('getPlayers$', () => {
     it('should work', () => {
-      spyOn(service, 'getAll').and.returnValue(of(players));
+      spyOn(service, 'getAll').and.returnValue(of(playersData));
       const action = new fromActions.GetPlayers();
-      const completion = new fromActions.GetPlayersSuccess(players);
+      const completion = new fromActions.GetPlayersSuccess(playersData);
 
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
@@ -79,9 +79,9 @@ describe('PlayerEffects', () => {
 
   describe('getPlayer$', () => {
     it('should work', () => {
-      spyOn(service, 'getById').and.returnValue(of(players[0]));
-      const action = new fromActions.GetPlayer(players[0].id);
-      const completion = new fromActions.GetPlayerSuccess(players[0]);
+      spyOn(service, 'getById').and.returnValue(of(playersData[0]));
+      const action = new fromActions.GetPlayer(playersData[0].id);
+      const completion = new fromActions.GetPlayerSuccess(playersData[0]);
 
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
@@ -92,7 +92,7 @@ describe('PlayerEffects', () => {
 
     it('should throw error', () => {
       spyOn(service, 'getById').and.returnValue(throwError(error));
-      const action = new fromActions.GetPlayer(players[0].id);
+      const action = new fromActions.GetPlayer(playersData[0].id);
       const completion = new fromActions.GetPlayerFail(error);
 
       actions$.stream = hot('-a', { a: action });
@@ -105,9 +105,9 @@ describe('PlayerEffects', () => {
 
   describe('createPlayer$', () => {
     it('should work', () => {
-      spyOn(service, 'create').and.returnValue(of(players[0]));
-      const action = new fromActions.CreatePlayer(players[0]);
-      const completion = new fromActions.CreatePlayerSuccess(players[0]);
+      spyOn(service, 'create').and.returnValue(of(playersData[0]));
+      const action = new fromActions.CreatePlayer(playersData[0]);
+      const completion = new fromActions.CreatePlayerSuccess(playersData[0]);
 
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-c', { c: completion });
@@ -118,7 +118,7 @@ describe('PlayerEffects', () => {
 
     it('should throw error', () => {
       spyOn(service, 'create').and.returnValue(throwError(error));
-      const action = new fromActions.CreatePlayer(players[0]);
+      const action = new fromActions.CreatePlayer(playersData[0]);
       const completion = new fromActions.CreatePlayerFail(error);
 
       actions$.stream = hot('-a', { a: action });
@@ -131,9 +131,9 @@ describe('PlayerEffects', () => {
 
   describe('updatePlayer$', () => {
     it('should work', () => {
-      spyOn(service, 'updateById').and.returnValue(of(players[0]));
-      const action = new fromActions.UpdatePlayer(players[0]);
-      const completion = new fromActions.UpdatePlayerSuccess(players[0]);
+      spyOn(service, 'updateById').and.returnValue(of(playersData[0]));
+      const action = new fromActions.UpdatePlayer(playersData[0]);
+      const completion = new fromActions.UpdatePlayerSuccess(playersData[0]);
 
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-c', { c: completion });
@@ -144,7 +144,7 @@ describe('PlayerEffects', () => {
 
     it('should throw error', () => {
       spyOn(service, 'updateById').and.returnValue(throwError(error));
-      const action = new fromActions.UpdatePlayer(players[0]);
+      const action = new fromActions.UpdatePlayer(playersData[0]);
       const completion = new fromActions.UpdatePlayerFail(error);
 
       actions$.stream = hot('-a', { a: action });
@@ -157,9 +157,9 @@ describe('PlayerEffects', () => {
 
   describe('deletePlayer$', () => {
     it('should work', () => {
-      spyOn(service, 'deleteById').and.returnValue(of(players[0]));
-      const action = new fromActions.DeletePlayer(players[0].id);
-      const completion = new fromActions.DeletePlayerSuccess(players[0].id);
+      spyOn(service, 'deleteById').and.returnValue(of(playersData[0]));
+      const action = new fromActions.DeletePlayer(playersData[0].id);
+      const completion = new fromActions.DeletePlayerSuccess(playersData[0].id);
 
       actions$.stream = hot('-a', { a: action });
       const expected = cold('-c', { c: completion });
@@ -170,7 +170,7 @@ describe('PlayerEffects', () => {
 
     it('should throw error', () => {
       spyOn(service, 'deleteById').and.returnValue(throwError(error));
-      const action = new fromActions.DeletePlayer(players[0].id);
+      const action = new fromActions.DeletePlayer(playersData[0].id);
       const completion = new fromActions.DeletePlayerFail(error);
 
       actions$.stream = hot('-a', { a: action });
