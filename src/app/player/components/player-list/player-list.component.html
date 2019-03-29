@@ -15,7 +15,7 @@
     <td>{{player.firstName}}</td>
     <td>{{player.lastName}}</td>
     <td>{{player.email}}</td>
-    <td class="table__edit" routerLink="/player/{{player.id}}/edit">edit</td>
-    <td class="table__delete" (click)="onDelete($event, player.id)">X</td>
+    <td class="table__edit" (click)="onUpdate($event, player.id)">Update</td>
+    <td class="table__delete" (click)="onSelect($event, player.id)">Select</td>
   </tr>
 </table>

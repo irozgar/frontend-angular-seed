@@ -11,6 +11,7 @@ import { Player } from '../../entities';
 })
 export class PlayerListPresenter implements OnInit {
   public players$: Observable<Player[]>;
+  public selectedPlayer$: Observable<Player>;
   public loading$: Observable<boolean>;
 
   constructor(
@@ -23,9 +24,15 @@ export class PlayerListPresenter implements OnInit {
 
     this.loading$ = this.playerFacade.getLoading();
     this.players$ = this.playerFacade.getAll();
+
   }
 
-  onDelete($event: string) {
+  onSelect(id: string) {
+    this.selectedPlayer$ = this.playerFacade.getOne(id);
+  }
+
+  onUpdate(id: string) {
+    this.playerFacade.updateOne(id);
   }
 
 }

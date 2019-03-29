@@ -9,17 +9,20 @@ import { Player } from '../../entities';
 })
 export class PlayerListComponent {
   @Input() players: Player[];
-  @Output() private delete = new EventEmitter<string>();
+  @Output() private select = new EventEmitter<string>();
+  @Output() private update = new EventEmitter<string>();
 
   constructor() {
   }
 
-  onDelete($event: Event, playerId: string) {
+  onSelect($event: Event, playerId: string) {
     $event.stopPropagation();
-    const remove = window.confirm('Are you sure?');
-    if (remove) {
-      this.delete.emit(playerId);
-    }
+    this.select.emit(playerId);
+  }
+
+  onUpdate($event: Event, playerId: string) {
+    $event.stopPropagation();
+    this.update.emit(playerId);
   }
 
 }

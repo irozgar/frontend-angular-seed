@@ -10,7 +10,9 @@ import { PlayerHttpService } from './player-http.service';
   providedIn: 'root',
 })
 export class PlayerFacadeService {
-  private players$ = new BehaviorSubject({});
+  private players = {};
+
+  private players$ = new BehaviorSubject(this.players);
   private loading$ = new BehaviorSubject(false);
 
   constructor(private playerHttpService: PlayerHttpService) {
@@ -21,7 +23,7 @@ export class PlayerFacadeService {
     return this.playerHttpService.loadAll()
       .pipe(map(convertToObjectLiteral))
       .subscribe(r => {
-        this.players$.next(r);
+        this.updatePlayers(r);
         this.loading$.next(false);
       });
   }
@@ -32,6 +34,21 @@ export class PlayerFacadeService {
 
   public getLoading(): Observable<boolean> {
     return this.loading$;
+  }
+
+  public getOne(id: string): Observable<Player> {
+    return this.players$.pipe(map(r => r[id]));
+  }
+
+  public updateOne(id: string): void {
+    const selectedOne = this.players[id];
+    const newOne = {...selectedOne, firstName: 'Dani'};
+    this.updatePlayers({...this.players, [id]: newOne});
+  }
+
+  private updatePlayers(v) {
+    this.players = v;
+    this.players$.next(this.players);
   }
 }
 
