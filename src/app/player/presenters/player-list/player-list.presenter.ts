@@ -23,7 +23,10 @@ export class PlayerListPresenter implements OnInit {
     this.loading = true;
     this.playerService.getAll().then(r => {
       this.players = r;
-      this.loading = false;
+      // this.otherService.getInfo().then(r2 => {
+      //    more logic
+            this.loading = false;
+      // }
     });
   }
 
