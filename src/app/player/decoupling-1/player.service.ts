@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Player } from '../entities/index';
 import { map } from 'rxjs/operators';
+import { PlayerHttpService } from './player-http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,12 @@ export class PlayerFacadeService {
   private players$ = new BehaviorSubject([]);
   private loading$ = new BehaviorSubject(false);
 
-  constructor(private httpService: HttpClient) {
+  constructor(private playerHttpService: PlayerHttpService) {
   }
 
   public loadAll() {
     this.loading$.next(true);
-    return this.httpService
-      .get<Player[]>(`/api/player`)
+    return this.playerHttpService.loadAll()
       .pipe(map(r => r))
       .subscribe(r => {
         this.players$.next(r);
