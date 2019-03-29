@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { Player } from '../../entities';
 import { PlayerEventsService, PlayerStoreService } from '../../services';
+import { PlayerService } from '../../decoupling-1/player.service';
 
 @Component({
   selector: 'app-player-list-presenter',
@@ -10,22 +11,23 @@ import { PlayerEventsService, PlayerStoreService } from '../../services';
   styleUrls: ['./player-list.presenter.scss'],
 })
 export class PlayerListPresenter implements OnInit {
-  public players$: Observable<Player[]>;
-  public loading$: Observable<boolean>;
+  public players: Player[] = [];
+  public loading: boolean;
 
   constructor(
-    private playerEventsService: PlayerEventsService,
-    private playerStoreService: PlayerStoreService,
+    private playerService: PlayerService,
   ) {
   }
 
   ngOnInit() {
-    this.players$ = this.playerStoreService.getAll();
-    this.loading$ = this.playerStoreService.getLoading();
+    this.loading = true;
+    this.playerService.getAll().then(r => {
+      this.players = r;
+      this.loading = false;
+    });
   }
 
   onDelete($event: string) {
-    this.playerEventsService.delete($event);
   }
 
 }

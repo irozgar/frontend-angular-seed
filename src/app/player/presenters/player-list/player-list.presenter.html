@@ -1,4 +1,5 @@
 <button routerLink="/player/create">Create Player</button>
 
-<app-player-list [players]="players$ | async" (delete)="onDelete($event)" ></app-player-list>
-<app-spinner color="#000000" *ngIf="loading$ | async as loading"></app-spinner>
+<app-player-list *ngIf="!loading" [players]="players" (delete)="onDelete($event)" ></app-player-list>
+<app-spinner color="#000000" *ngIf="loading"></app-spinner>
+
