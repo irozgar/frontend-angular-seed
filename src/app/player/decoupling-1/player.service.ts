@@ -7,20 +7,13 @@ import { Player } from '../entities/index';
   providedIn: 'root',
 })
 export class PlayerService {
+
   constructor(private httpService: HttpClient) {
   }
 
   public getAll(): Promise<Player[]> {
-    return new Promise((resolve, reject) => {
-      this.httpService
+      return this.httpService
         .get<Player[]>(`/api/player`)
-        .toPromise()
-        .then(result => {
-          resolve(result);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
+        .toPromise();
   }
 }
