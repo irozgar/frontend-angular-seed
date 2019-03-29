@@ -11,8 +11,8 @@ import { PlayerService } from '../../decoupling-1/player.service';
   styleUrls: ['./player-list.presenter.scss'],
 })
 export class PlayerListPresenter implements OnInit {
-  public players: Player[] = [];
-  public loading: boolean;
+  public players$: Observable<Player[]>;
+  public loading$: Observable<boolean>;
 
   constructor(
     private playerService: PlayerService,
@@ -20,14 +20,10 @@ export class PlayerListPresenter implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.playerService.getAll().then(r => {
-      this.players = r;
-      // this.otherService.getInfo().then(r2 => {
-      //    more logic
-            this.loading = false;
-      // }
-    });
+    this.playerService.loadAll();
+
+    this.loading$ = this.playerService.getLoading();
+    this.players$ = this.playerService.getAll();
   }
 
   onDelete($event: string) {
