@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { PlayerFacadeService } from '../../decoupling-1/player.service';
 import { Player } from '../../entities';
-import { PlayerEventsService, PlayerStoreService } from '../../services';
-import { PlayerService } from '../../decoupling-1/player.service';
 
 @Component({
   selector: 'app-player-list-presenter',
@@ -15,15 +14,15 @@ export class PlayerListPresenter implements OnInit {
   public loading$: Observable<boolean>;
 
   constructor(
-    private playerService: PlayerService,
+    private playerFacade: PlayerFacadeService,
   ) {
   }
 
   ngOnInit() {
-    this.playerService.loadAll();
+    this.playerFacade.loadAll();
 
-    this.loading$ = this.playerService.getLoading();
-    this.players$ = this.playerService.getAll();
+    this.loading$ = this.playerFacade.getLoading();
+    this.players$ = this.playerFacade.getAll();
   }
 
   onDelete($event: string) {

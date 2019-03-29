@@ -7,7 +7,7 @@ import { Player } from '../entities/index';
 @Injectable({
   providedIn: 'root',
 })
-export class PlayerService {
+export class PlayerFacadeService {
   private players$ = new BehaviorSubject([]);
   private loading$ = new BehaviorSubject(false);
 
