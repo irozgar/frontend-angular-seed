@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Player } from '../entities/index';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class PlayerFacadeService {
     this.loading$.next(true);
     return this.httpService
       .get<Player[]>(`/api/player`)
-      .toPromise()
-      .then(r => {
+      .pipe(map(r => r))
+      .subscribe(r => {
         this.players$.next(r);
         this.loading$.next(false);
       });
